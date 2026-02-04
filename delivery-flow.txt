@@ -1,0 +1,21 @@
+Developer
+  ↓
+Git Commit/Push
+  ↓
+GitHub
+  ↓
+Jenkins Trigger
+  ↓
+Maven Build
+  ↓
+Artifact (JAR/WAR)
+  ↓
+Deploy to Server/Container
+  ↓
+Promote Across Environments
+  ↓
+Production Release
+  ↓
+Monitoring
+  ↓
+Feedback
