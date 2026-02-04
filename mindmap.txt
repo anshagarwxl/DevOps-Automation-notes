@@ -1,0 +1,21 @@
+DEVOPS FLOW (Mind Map)
+
+Developer
+   ↓
+Git (Version Control)
+   ↓
+GitHub (Central Repo)
+   ↓
+Jenkins (CI/CD Automation)
+   ↓
+Maven (Build + Dependencies)
+   ↓
+Packaging (JAR/WAR)
+   ↓
+Container / Server (Tomcat/Docker)
+   ↓
+Environments (Dev → SIT → UAT → Prod)
+   ↓
+Monitoring & Feedback
+   ↓
+Continuous Improvement
