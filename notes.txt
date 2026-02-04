@@ -1,0 +1,366 @@
+DevOps Workshop — Day 1 Deep-Dive Notes
+Table of Contents
+DevOps Fundamentals
+
+Git and GitHub
+
+CI/CD Concepts
+
+Jenkins (CI/CD Automation)
+
+Maven (Build and Dependency Management)
+
+Packaging (JAR/WAR)
+
+Tomcat, Web Servers, and Servlet Containers
+
+Containers vs Packages
+
+Environments (Dev, SIT, UAT, Prod)
+
+End-to-End Delivery Flow
+
+Practical Patterns and Best Practices
+
+1) DevOps Fundamentals
+Definition
+DevOps is a culture and set of practices that unify Development (Dev) and Operations (Ops) to enable fast, reliable, and repeatable software delivery through automation, collaboration, and continuous feedback.
+
+Core Goals
+Reduce lead time for changes
+
+Increase deployment frequency
+
+Lower change failure rate
+
+Faster recovery from failures
+
+Problems DevOps Addresses
+Manual, error-prone deployments
+
+Environment inconsistencies
+
+Silos between Dev and Ops
+
+Late discovery of defects
+
+Long release cycles
+
+Pillars
+Automation: build, test, deploy, infra
+
+Collaboration: shared ownership
+
+Continuous Improvement: small, frequent releases
+
+Observability: logs, metrics, tracing
+
+Mental Model
+Treat software delivery like a production line:
+
+Standardized steps
+
+Quality checks early
+
+Automation over manual work
+
+Feedback loops at every stage
+
+2) Git and GitHub
+Git (Version Control System)
+Tracks changes to files over time and enables collaboration.
+
+What Git Records
+Who changed what
+
+When it changed
+
+Exact differences between versions
+
+History for rollback and auditing
+
+Core Concepts
+Repository: project + history
+
+Commit: immutable snapshot with a message
+
+Branch: parallel line of development
+
+Merge: combining branches
+
+Merge Conflict: overlapping edits requiring manual resolution
+
+GitHub (Hosting Platform)
+Cloud platform to host Git repositories and enable collaboration, reviews, and integrations.
+
+Why GitHub Matters in DevOps
+Central source of truth
+
+Integrates with CI/CD tools
+
+Enables pull requests and code reviews
+
+Triggers pipelines via webhooks
+
+3) CI/CD Concepts
+Continuous Integration (CI)
+Practice of frequently integrating code into a shared repo, with automated builds and tests.
+
+Purpose
+Detect issues early
+
+Keep main branch stable
+
+Reduce integration pain
+
+Continuous Delivery (CD)
+Every change that passes CI is deployable. Deployment to production may require approval.
+
+Continuous Deployment
+Every change that passes CI is automatically deployed to production.
+
+Typical CI/CD Stages
+Source
+
+Build
+
+Test
+
+Package
+
+Deploy
+
+Monitor
+
+Quality Gates
+Automated checks (tests, coverage, scans) that must pass before promotion.
+
+4) Jenkins (CI/CD Automation)
+What Jenkins Is
+An automation server that orchestrates CI/CD pipelines.
+
+Key Concepts
+Job: a configured task Jenkins runs
+
+Pipeline: codified workflow of stages
+
+Stage: logical step (Build, Test, Deploy)
+
+Agent/Node: machine that runs jobs
+
+Triggers
+SCM webhook (on push)
+
+Manual
+
+Scheduled (cron)
+
+Pipeline as Code
+Pipelines defined in code (e.g., Jenkinsfile) for versioning and repeatability.
+
+What Jenkins Does Not Do
+Does not fix code
+
+Does not replace testing strategy
+
+Does not guarantee quality without proper tests
+
+Best Practices
+Keep pipelines fast
+
+Fail fast on errors
+
+Store pipeline config in repo
+
+Use credentials management, not hardcoding secrets
+
+5) Maven (Build and Dependency Management)
+Purpose
+Standardize builds
+
+Manage dependencies
+
+Produce reproducible artifacts
+
+Standard Directory Layout
+src/main/java
+src/main/resources
+src/test/java
+target/
+pom.xml (Project Object Model)
+Central configuration describing:
+
+Project coordinates (groupId, artifactId, version)
+
+Dependencies
+
+Plugins
+
+Packaging type
+
+Dependencies
+Declared libraries with versions. Maven resolves transitive dependencies and downloads them from repositories.
+
+Local Repository
+Typically ~/.m2/repository. Caches dependencies for reuse.
+
+Lifecycle (Simplified)
+clean: remove previous outputs
+
+compile: compile sources
+
+test: run tests
+
+package: create JAR/WAR
+
+install: publish to local repo
+
+deploy: publish to remote repo
+
+Reproducibility Principle
+Given same pom.xml and source, any machine should produce the same artifact.
+
+6) Packaging (JAR/WAR)
+Artifact
+A versioned, built output of a project.
+
+JAR
+Used for libraries or standalone apps. May be executable.
+
+WAR
+Web Application Archive for Java web apps.
+
+WAR Contents
+Compiled classes
+
+Dependencies
+
+Web resources
+
+Configuration
+
+Limitation
+WAR depends on the target environment (e.g., Java version, server like Tomcat).
+
+7) Tomcat, Web Servers, and Servlet Containers
+Web Server
+Handles HTTP requests and serves static content.
+Examples: Nginx, Apache HTTP Server, IIS.
+
+Servlet Container
+Executes Java servlets and manages their lifecycle.
+Responsibilities:
+
+Request/response handling
+
+Thread management
+
+Session management
+
+Security
+
+Tomcat
+Combines web server capabilities with a servlet container to run Java web apps.
+
+Deployment Model
+Place WAR in webapps/
+
+Tomcat expands and runs it
+
+App accessible via context path
+
+8) Containers vs Packages
+Package (JAR/WAR)
+Contains application and libraries only. Relies on host environment.
+
+Container
+Encapsulates:
+
+App
+
+Runtime
+
+OS-level dependencies
+
+Configuration
+
+Benefits of Containers
+Environment consistency
+
+Isolation
+
+Portability
+
+Faster scaling
+
+Conceptual Difference
+Package solves distribution of code.
+Container solves distribution of runtime environment.
+
+9) Environments
+Typical Flow
+Dev → SIT → UAT → Production
+
+Development (Dev)
+Feature development
+
+Frequent changes
+
+Lower stability requirements
+
+System Integration Testing (SIT)
+Test interactions between modules/services
+
+Focus on integration defects
+
+User Acceptance Testing (UAT)
+Business validation
+
+Confirms requirements are met
+
+Production
+Real users
+
+High stability and security
+
+Controlled changes
+
+Separation Rationale
+Isolation of risk
+
+Access control
+
+Realistic testing
+
+Compliance
+
+10) End-to-End Delivery Flow
+Developer
+  → Git Commit/Push
+  → GitHub
+  → Jenkins Trigger
+  → Maven Build
+  → Artifact (JAR/WAR)
+  → Deploy to Server/Container
+  → Promote Across Environments
+  → Production Release
+  → Monitoring and Feedback
+  
+11) Practical Patterns and Best Practices
+Shift Left Testing
+Test earlier in the pipeline to catch issues sooner.
+
+Immutable Artifacts
+Build once, promote the same artifact across environments.
+
+Configuration per Environment
+Keep code same; vary config via environment variables or config files.
+
+Least Privilege Access
+Limit production access to reduce risk.
+
+Observability
+Collect logs, metrics, and traces to understand system behavior.
+
+Automation First
+Prefer scripted and versioned processes over manual steps.
