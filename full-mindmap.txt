@@ -1,0 +1,22 @@
+DevOps
+  → Culture
+      → Collaboration
+      → Shared ownership
+  → Automation
+      → CI/CD
+      → Jenkins
+      → Maven
+  → Version Control
+      → Git
+      → GitHub
+  → Packaging
+      → JAR/WAR
+  → Runtime
+      → Tomcat
+      → Containers
+  → Environments
+      → Dev → SIT → UAT → Prod
+  → Monitoring
+      → Logs
+      → Metrics
+      → Feedback
