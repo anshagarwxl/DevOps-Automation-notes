@@ -1,4 +1,4 @@
-DevOps Workshop — Day 1 Deep-Dive Notes
+DevOps Workshop — Day 1 Notes
 Table of Contents
 DevOps Fundamentals
 
